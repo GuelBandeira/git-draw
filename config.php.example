@@ -1,0 +1,18 @@
+<?php
+// GitHub OAuth Configuration
+// Copie este arquivo para config.php e preencha com suas credenciais
+
+// Obtenha suas credenciais em: https://github.com/settings/developers
+// 1. Crie um novo OAuth App
+// 2. Homepage URL: http://localhost/git-drawn (ou seu domínio)
+// 3. Authorization callback URL: http://localhost/git-drawn/callback.php (ou seu domínio)
+// 4. Copie o Client ID e Client Secret abaixo
+
+define('GITHUB_CLIENT_ID', 'YOUR_CLIENT_ID');
+define('GITHUB_CLIENT_SECRET', 'YOUR_CLIENT_SECRET');
+define('GITHUB_REDIRECT_URI', 'http://localhost/git-drawn/callback.php');
+define('GITHUB_AUTH_URL', 'https://github.com/login/oauth/authorize');
+define('GITHUB_TOKEN_URL', 'https://github.com/login/oauth/access_token');
+define('GITHUB_API_URL', 'https://api.github.com');
+?>
+

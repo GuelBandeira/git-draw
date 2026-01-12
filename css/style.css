@@ -1,0 +1,39 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Dark mode toggle */
+.darkmode {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #238636;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    text-decoration: none;
+    z-index: 1000;
+}
+
+.darkmode:hover {
+    background: #2ea043;
+    transform: scale(1.1);
+}
+
+.darkmode i {
+    font-size: 24px;
+}
+
