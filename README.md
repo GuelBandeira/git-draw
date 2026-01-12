@@ -1,138 +1,96 @@
-# GitHub Contribution Message Generator
+# 🎨 GitHub Contribution Art Generator
 
-Sistema PHP para gerar mensagens visuais no gráfico de contribuições do GitHub através de commits programáticos.
+[![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?style=flat&logo=php&logoColor=white)](https://www.php.net/)
+[![GitHub API](https://img.shields.io/badge/GitHub-API-181717?style=flat&logo=github&logoColor=white)](https://docs.github.com/en/rest)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 🚀 Funcionalidades
+A web-based tool that allows you to "draw" on your GitHub contribution graph by generating backdated commits. It features a real-time preview, commit intensity control, and a sleek user interface with dark mode support.
 
-- ✅ Preview em tempo real do grid 52 semanas × 7 dias
-- ✅ Suporte para letras, números e espaços
-- ✅ Integração com GitHub OAuth
-- ✅ Geração automática de commits
-- ✅ Interface moderna com suporte a dark mode
 
-## 📋 Pré-requisitos
+![Application Screenshot](/assets/main_page.png)
 
-- PHP 7.4 ou superior
-- Servidor web (Apache/Nginx) ou WAMP/XAMPP
-- Conta no GitHub
-- Aplicativo OAuth do GitHub configurado
 
-## ⚙️ Configuração
+## ✨ Features
 
-### 1. Criar Aplicativo OAuth no GitHub
+- **Real-time Preview:** See exactly how your text/art will look on the grid before committing.
+- **Intensity Control:** Choose from 4 levels of commit shades (Low to Max) to create depth in your drawings.
+- **Smart Date Calculation:** Automatically calculates dates based on the selected year and grid position.
+- **Optimized Backend:** Uses commit chaining and single-ref updates to generate thousands of commits in seconds.
+- **Live Progress:** Real-time progress bar with "loading screen tips" via Server-Sent Events (SSE).
+- **Internationalization:** Native support for **English** (🇺🇸) and **Portuguese** (🇧🇷) with auto-detection.
+- **Dark/Light Mode:** Automatically adapts to your system theme or user preference.
 
-1. Acesse: https://github.com/settings/developers
-2. Clique em "New OAuth App"
-3. Preencha os dados:
-   - **Application name**: GitHub Contribution Generator
-   - **Homepage URL**: `http://localhost/git-drawn`
-   - **Authorization callback URL**: `http://localhost/git-drawn/callback.php`
-4. Anote o **Client ID** e **Client Secret**
+## 🚀 Prerequisites
 
-### 2. Configurar Credenciais
+- PHP 7.4 or higher.
+- A Web Server (Apache/Nginx) or PHP built-in server.
+- A GitHub Account.
+- A GitHub **OAuth Application** (Client ID and Client Secret).
 
-Edite o arquivo `config.php` e substitua:
+## 🛠️ Installation
 
-```php
-define('GITHUB_CLIENT_ID', 'YOUR_CLIENT_ID');
-define('GITHUB_CLIENT_SECRET', 'YOUR_CLIENT_SECRET');
-define('GITHUB_REDIRECT_URI', 'http://localhost/git-drawn/callback.php');
-```
+1. **Clone the repository:**
+   git clone https://github.com/your-username/github-art-generator.git
+   cd github-art-generator
 
-**Importante**: 
-- Se estiver usando um domínio diferente, atualize a URL de redirecionamento no arquivo `config.php`
-- O arquivo `config.php` está no `.gitignore` para proteger suas credenciais
+2. **Configure GitHub OAuth:**
+   - Go to [GitHub Developer Settings](https://github.com/settings/developers).
+   - Click **"New OAuth App"**.
+   - **Application Name:** GitHub Art Generator (or your choice).
+   - **Homepage URL:** `http://localhost:8000` (or your production URL).
+   - **Authorization callback URL:** `http://localhost:8000/auth.php`.
+   - Copy the **Client ID** and generate a **Client Secret**.
 
-### 3. Criar Repositório no GitHub
+3. **Setup Configuration:**
+   Create a `config.php` file in the root directory (if not already present) to store your credentials (`GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, and `REDIRECT_URI`).
 
-1. Crie um novo repositório no GitHub (pode ser privado)
-2. Anote o nome no formato: `usuario/repositorio`
 
-## 🎯 Como Usar
+   ```php
+   <?php
+   define('GITHUB_CLIENT_ID', 'YOUR_CLIENT_ID_HERE');
+   define('GITHUB_CLIENT_SECRET', 'YOUR_CLIENT_SECRET_HERE');
+   define('REDIRECT_URI', 'http://localhost:8000/auth.php');
+   ?>
+   ```
 
-1. **Acesse a aplicação**: `http://localhost/git-drawn`
+4. **Run the application:**
+   You can use the built-in PHP server for testing:
+   php -S localhost:8000
 
-2. **Digite sua mensagem**: 
-   - Máximo de 10 caracteres
-   - Suporta letras (A-Z), números (0-9) e espaços
-   - Exemplo: "2024", "HELLO", "TEST"
+5. **Access:**
+   Open your browser and navigate to `http://localhost:8000`.
 
-3. **Visualize o preview**: 
-   - O grid será atualizado automaticamente
-   - Veja quantos commits serão necessários
+## 📖 How to Use
 
-4. **Conecte-se ao GitHub**:
-   - Clique em "Conectar com GitHub"
-   - Autorize a aplicação
-   - Você será redirecionado de volta
+1. **Connect:** Click the "Connect with GitHub" button to authorize the app.
+2. **Configure:**
+   - **Message:** Type the text you want to appear on your profile (Max 10 chars).
+   - **Repository:** Enter the name of the repository where commits will be created (e.g., `your-user/art-repo`). *Note: It's recommended to use a dedicated empty repository for this.*
+   - **Year:** Select the year you want to paint.
+   - **Intensity:** Select how dark the green squares should be (Level 1-4).
+3. **Generate:** Click "Generate Commits" and watch the magic happen!
 
-5. **Gere os commits**:
-   - Informe o nome do repositório (ex: `seu-usuario/git-drawn`)
-   - Clique em "Gerar Commits no GitHub"
-   - Aguarde o processo (pode levar alguns minutos)
+## ⚠️ Disclaimer
 
-## 📝 Notas Importantes
+This tool is created for **educational and aesthetic purposes only**.
+- It manipulates your contribution graph by creating backdated commits.
+- While this is generally harmless, avoid abusing the GitHub API limits.
+- It is highly recommended to use a **private** or a **dedicated public repository** for these commits so you don't clutter your actual project history.
 
-### Sobre os Commits
+## 🤝 Contributing
 
-- Os commits são criados com datas retroativas (52 semanas atrás até hoje)
-- O GitHub pode levar algumas horas para atualizar o gráfico de contribuições
-- O gráfico mostra contribuições do último ano, então commits muito antigos podem não aparecer
-- Para melhor resultado, use um repositório novo ou pouco usado
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-### Limitações
+1. Fork the project.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
 
-- **Rate Limiting**: O GitHub limita a 5.000 requisições por hora para usuários autenticados
-- **Tempo**: Gerar muitos commits pode levar vários minutos
-- **Datas**: Commits com datas muito antigas podem não aparecer no gráfico
+## 📄 License
 
-### Caracteres Suportados
+Distributed under the MIT License. See `LICENSE` for more information.
 
-- Números: 0-9
-- Letras: A-Z (maiúsculas e minúsculas são tratadas como maiúsculas)
-- Espaço: para separar palavras
+---
 
-## 🔧 Estrutura de Arquivos
-
-```
-git-drawn/
-├── index.php              # Interface principal
-├── auth.php               # Inicia autenticação OAuth
-├── callback.php           # Processa callback do OAuth
-├── logout.php             # Faz logout
-├── generate_commits.php   # Gera commits via API
-├── css/
-│   └── style.css          # Estilos
-├── js/
-│   └── script.js          # JavaScript
-└── README.md              # Este arquivo
-```
-
-## 🐛 Solução de Problemas
-
-### Erro: "Não autenticado"
-- Verifique se você completou o fluxo OAuth
-- Tente desconectar e conectar novamente
-
-### Erro: "Failed to create commit"
-- Verifique se o repositório existe
-- Verifique se você tem permissão de escrita no repositório
-- Verifique se o branch é `main` ou `master`
-
-### Commits não aparecem no gráfico
-- Aguarde algumas horas (o GitHub atualiza periodicamente)
-- Verifique se os commits foram criados no repositório correto
-- Verifique se as datas dos commits estão dentro do último ano
-
-### Rate Limit Exceeded
-- Aguarde 1 hora antes de tentar novamente
-- Reduza o número de commits (use mensagens menores)
-
-## 📄 Licença
-
-Este projeto é fornecido como está, sem garantias.
-
-## 🤝 Contribuições
-
-Sinta-se livre para melhorar este projeto!
-
+Made with 💚 by [Guel Bandeira](https://github.com/GuelBandeira)
