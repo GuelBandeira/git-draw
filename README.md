@@ -30,7 +30,7 @@ A web-based tool that allows you to "draw" on your GitHub contribution graph by 
 ## 🛠️ Installation
 
 1. **Clone the repository:**
-   git clone https://github.com/your-username/github-art-generator.git
+   git clone https://github.com/GuelBandeira/github-art-generator.git
    cd github-art-generator
 
 2. **Configure GitHub OAuth:**
